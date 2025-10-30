@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{# 
+  base.html se design (navbar, footer, css) inherit kar rahe hain 
+#}
+
+{% block content %}
+<!-- Signup Page Start -->
+<div style="max-width:500px; margin:auto; background:#f9f9f9; padding:25px; border-radius:10px; margin-top:40px;">
+    
+    <h2 style="text-align:center;">📝 Create Your Account</h2>
+    <hr>
+
+    <!-- Agar form me errors aaye to unhe show kare -->
+    {% if form.errors %}
+        <div style="color:red; background:#ffe6e6; padding:10px; border-radius:5px;">
+            <strong>⚠️ Kuch galat hai! Kripya check karein:</strong>
+            <ul>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li>{{ field.label }} - {{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <!-- Signup form start -->
+    <form method="POST" style="display:flex; flex-direction:column; gap:12px;">
+        {% csrf_token %}
+        {# CSRF security token — har POST request ke liye zaroori hai #}
+
+        <!-- Username Field -->
+        <label for="id_username">Username:</label>
+        {{ form.username }}
+
+        <!-- Email Field (agar form me hai) -->
+        {% if form.email %}
+            <label for="id_email">Email:</label>
+            {{ form.email }}
+        {% endif %}
+
+        <!-- Password Fields -->
+        <label for="id_password1">Password:</label>
+        {{ form.password1 }}
+
+        <label for="id_password2">Confirm Password:</label>
+        {{ form.password2 }}
+
+        <!-- Submit Button -->
+        <button type="submit" style="
+            background:#007bff; 
+            color:white; 
+            padding:10px; 
+            border:none; 
+            border-radius:5px; 
+            cursor:pointer;
+        ">
+            Sign Up
+        </button>
+    </form>
+
+    <p style="margin-top:15px; text-align:center;">
+        Already have an account?
+        <a href="{% url 'login' %}">Login here</a>
+    </p>
+</div>
+<!-- Signup Page End -->
+{% endblock %}

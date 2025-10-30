@@ -1,0 +1,37 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+.env/
+env/
+
+# Django stuff
+*.log
+db.sqlite3
+media/
+staticfiles/
+
+# Migrations cache
+*/migrations/__pycache__/
+*/migrations/*.pyc
+
+# Local settings
+local_settings.py
+
+# IDE / Editor folders
+.vscode/
+.idea/
+
+# Mac OS files
+.DS_Store
+
+# Byte-compiled / optimized / DLL files
+*.so
+*.dll
+*.dylib
+
+# pytest cache
+.pytest_cache/

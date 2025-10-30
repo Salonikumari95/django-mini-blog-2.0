@@ -1,0 +1,51 @@
+<!-- Navbar (Menu Bar) -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+  <div class="container">
+    <!-- Brand -->
+    <a class="navbar-brand fw-bold" href="{% url 'home' %}"> MyBlog</a>
+
+    <!-- Mobile Menu Button -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar Items -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'home' %}"> Home</a>
+        </li>
+
+        {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'post_create' %}"> Create Post</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'user_posts' %}"> My Posts</a>
+          </li>
+
+          <!-- Logout (POST Form) -->
+          <li class="nav-item ms-2">
+            <form action="{% url 'logout' %}" method="post" class="d-inline">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-outline-light btn-sm">Logout</button>
+            </form>
+          </li>
+
+          <!-- User Greeting -->
+          <li class="nav-item ms-2">
+            <span class="nav-link text-info fw-semibold">Hi, {{ user.username }} 👋</span>
+          </li>
+
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'signup' %}"> Sign Up</a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
